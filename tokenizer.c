@@ -308,7 +308,7 @@ token_s extract_token(string_view_s *sv) {
 		}
 		token.type = TOKEN_TYPE_NOT_YET_IMPLEMENTED;
 		switch ((*sv).str[0]) {
-		case '"':
+		case '"': {
 			token.type = TOKEN_TYPE_STRING_LITTERAL;
 			i = 1;
 			while (i < (*sv).len && (*sv).str[i] != '"') {
@@ -320,8 +320,8 @@ token_s extract_token(string_view_s *sv) {
 			if (i < (*sv).len) {
 				i = i + 1;
 			}
-			break;
-		case '\'':
+		} break;
+		case '\'': {
 			token.type = TOKEN_TYPE_CHAR_LITTERAL;
 			i = 1;
 			while (i < (*sv).len && (*sv).str[i] != '\'') {
@@ -333,8 +333,8 @@ token_s extract_token(string_view_s *sv) {
 			if (i < (*sv).len) {
 				i = i + 1;
 			}
-			break;
-		case '!':
+		} break;
+		case '!': {
 			if (i == 1 || (i > 1 && (*sv).str[1] != '=')) {
 				token.type = TOKEN_TYPE_NOT;
 				i = 1;
@@ -343,15 +343,16 @@ token_s extract_token(string_view_s *sv) {
 				token.type = TOKEN_TYPE_NOT_EQUAL;
 				i = 2;
 			}
-			break;
-		case '~':
+		} break;
+		case '~': {
 			token.type = TOKEN_TYPE_BITWISE_NOT;
 			i = 1;
-			break;
-		case '^':
+		} break;
+		case '^': {
 			token.type = TOKEN_TYPE_BITWISE_XOR;
 			i = 1;
-		case '<':
+		} break;
+		case '<': {
 			if (i == 1 || (i > 1 && (*sv).str[1] != '=')) {
 				token.type = TOKEN_TYPE_LESS_THAN;
 				i = 1;
@@ -360,8 +361,8 @@ token_s extract_token(string_view_s *sv) {
 				token.type = TOKEN_TYPE_LESS_THAN_EQUAL;
 				i = 2;
 			}
-			break;
-		case '>':
+		} break;
+		case '>': {
 			if (i == 1 || (i > 1 && (*sv).str[1] != '=')) {
 				token.type = TOKEN_TYPE_GREATER_THAN;
 				i = 1;
@@ -370,8 +371,8 @@ token_s extract_token(string_view_s *sv) {
 				token.type = TOKEN_TYPE_GREATER_THAN_EQUAL;
 				i = 2;
 			}
-			break;
-		case '#':
+		} break;
+		case '#': {
 			token.type = TOKEN_TYPE_PREPROCESSOR;
 			i = 0;
 			while (i < (*sv).len && (*sv).str[i] != '\n') {
@@ -380,8 +381,8 @@ token_s extract_token(string_view_s *sv) {
 				}
 				i = i + 1;
 			}
-			break;
-		case '|':
+		} break;
+		case '|': {
 			if (i == 1 || (i > 1 && (*sv).str[1] != '|')) {
 				token.type = TOKEN_TYPE_BITWISE_OR;
 				i = 1;
@@ -390,8 +391,8 @@ token_s extract_token(string_view_s *sv) {
 				token.type = TOKEN_TYPE_OR;
 				i = 2;
 			}
-			break;
-		case '&':
+		} break;
+		case '&': {
 			if (i == 1 || (i > 1 && (*sv).str[1] != '&')) {
 				token.type = TOKEN_TYPE_BITWISE_AND;
 				i = 1;
@@ -400,40 +401,40 @@ token_s extract_token(string_view_s *sv) {
 				token.type = TOKEN_TYPE_AND;
 				i = 2;
 			}
-			break;
-		case '.':
+		} break;
+		case '.': {
 			token.type = TOKEN_TYPE_DOT;
 			i = 1;
-			break;
-		case ',':
+		} break;
+		case ',': {
 			token.type = TOKEN_TYPE_COMMA;
 			i = 1;
-			break;
-		case '(':
+		} break;
+		case '(': {
 			token.type = TOKEN_TYPE_L_PARENTHESES;
 			i = 1;
-			break;
-		case ')':
+		} break;
+		case ')': {
 			token.type = TOKEN_TYPE_R_PARENTHESES;
 			i = 1;
-			break;
-		case '[':
+		} break;
+		case '[': {
 			token.type = TOKEN_TYPE_L_BRACKET;
 			i = 1;
-			break;
-		case ']':
+		} break;
+		case ']': {
 			token.type = TOKEN_TYPE_R_BRACKET;
 			i = 1;
-			break;
-		case '{':
+		} break;
+		case '{': {
 			token.type = TOKEN_TYPE_L_CURLY_BRACE;
 			i = 1;
-			break;
-		case '}':
+		} break;
+		case '}': {
 			token.type = TOKEN_TYPE_R_CURLY_BRACE;
 			i = 1;
-			break;
-		case '=':
+		} break;
+		case '=': {
 			if (i == 1 || (i > 1 && (*sv).str[1] != '=')) {
 				token.type = TOKEN_TYPE_ASSIGN;
 				i = 1;
@@ -442,24 +443,24 @@ token_s extract_token(string_view_s *sv) {
 				token.type = TOKEN_TYPE_EQUAL;
 				i = 2;
 			}
-			break;
-		case ';':
+		} break;
+		case ';': {
 			token.type = TOKEN_TYPE_SEMI_COLON;
 			i = 1;
-			break;
-		case ':':
+		} break;
+		case ':': {
 			token.type = TOKEN_TYPE_COLON;
 			i = 1;
-			break;
-		case '+':
+		} break;
+		case '+': {
 			token.type = TOKEN_TYPE_PLUS;
 			i = 1;
-			break;
-		case '-':
+		} break;
+		case '-': {
 			token.type = TOKEN_TYPE_MINUS;
 			i = 1;
-			break;
-		case '*':
+		} break;
+		case '*': {
 			if (i == 1 || (i > 1 && (*sv).str[1] != '/')) {
 				token.type = TOKEN_TYPE_ASTERISK;
 				i = 1;
@@ -468,8 +469,8 @@ token_s extract_token(string_view_s *sv) {
 				token.type = TOKEN_TYPE_BLOCK_COMMENT_END;
 				i = 2;
 			}
-			break;
-		case '/':
+		} break;
+		case '/': {
 			if (i == 1 || (i > 1 && (*sv).str[1] != '/' && (*sv).str[1] != '*')) {
 				token.type = TOKEN_TYPE_FORWARD_SLASH;
 				i = 1;
@@ -491,9 +492,8 @@ token_s extract_token(string_view_s *sv) {
 				}
 				token.type = TOKEN_TYPE_BLOCK_COMMENT_START;
 			}
-			break;
-		default:
-			break;
+		} break;
+		default: break;
 		}
 	}
 	token.value.str = (*sv).str;
@@ -507,7 +507,6 @@ token_s extract_token(string_view_s *sv) {
 token_s* tokenize(char *buf) {
 	if (!buf) return nul;
 
-	size_t i;
 	size_t it;
 	string_view_s file;
 	token_s *tokens;
@@ -531,8 +530,6 @@ token_s* tokenize(char *buf) {
 }
 
 int main(void) {
-	// Lexer
-
 	char *file;
 	token_s *tokens;
 	size_t i;
@@ -557,7 +554,7 @@ int main(void) {
 			||  tokens[i].type == TOKEN_TYPE_STRING_LITTERAL
 			||  tokens[i].type == TOKEN_TYPE_IDENTIFIER
 			||  tokens[i].type == TOKEN_TYPE_EMPTY) {
-				printf(":[%zu][%.*s]", tokens[i].value.len, tokens[i].value.len, tokens[i].value.str);
+				printf(":[%zu][%.*s]", tokens[i].value.len, (int)tokens[i].value.len, tokens[i].value.str);
 			}
 			printf("\n");
 			i = i + 1;
